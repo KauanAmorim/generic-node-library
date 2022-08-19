@@ -1,6 +1,6 @@
 const path = require('path');
 const getFileLinks = require('../extract-links')
-const { isValidationRequired } = require('../valid-arguments');
+const { isValidationRequired, valid } = require('../valid-arguments');
 
 const arrayLinkResult = [
     {
@@ -39,5 +39,19 @@ describe('valid-arguments - isValidationRequired::', () => {
     it('should return False if there are less or equal than 3 arguments', () => {
         const result = isValidationRequired(shortArguments);
         expect(result).toBe(false)
+    })
+})
+
+const validArguments = ['argument1', 'argument2', 'argument3', '--rootdir']
+const invalidArguments = ['argument1', 'argument2', 'argument3', '--invalid-argument']
+
+describe('valid-arguments - valid::', () => {
+    it('should return True if has valid arguments', () => {
+        const result = valid(validArguments)
+        expect(result).toBe(true)
+    })
+    it('should throw an error if has invalid arguments', () => {
+        expect(() => valid(invalidArguments)).toThrow(Error)
+        expect(() => valid(invalidArguments)).toThrow('Invalid argument')
     })
 })

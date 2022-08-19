@@ -25,8 +25,6 @@ if(validArguments.isValidationRequired(arguments)){
                 return console.log(chalk.redBright('This functionality under development'));
             case '--filepath':
                 return console.log(chalk.redBright('This functionality under development'));
-            default:
-                return console.log(chalk.redBright('This functionality don\'t exist'));
         }
     }
 } else {
