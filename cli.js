@@ -13,7 +13,7 @@ async function listLinks(filePath) {
 
 async function checkLinks(filePath) {
     const links = await getFileLinks(filePath)
-    console.log(chalk.yellow('valid links'), validateLinks(links))
+    console.log(chalk.yellow('valid links'), await validateLinks(links))
 }
 
 if(validArguments.isValidationRequired(arguments)){
