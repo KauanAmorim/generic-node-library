@@ -1,9 +1,10 @@
-function isValidationRequired(arguments) {
-    return arguments.length > 3;
+function isValidationRequired(arg) {
+    const isTrue = arg.length > 3; 
+    return isTrue;
 }
 
-function valid(arguments) {
-    const argumentToValidate = arguments[3];
+function valid(arg) {
+    const argumentToValidate = arg[3];
     const validArguments = ['--validate-links', '--rootdir', '--filepath'];
     const isValid = validArguments.includes(argumentToValidate);
     if(!isValid) {

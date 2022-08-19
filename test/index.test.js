@@ -1,5 +1,6 @@
 const path = require('path');
 const getFileLinks = require('../extract-links')
+const { isValidationRequired } = require('../valid-arguments');
 
 const arrayLinkResult = [
     {
@@ -7,7 +8,7 @@ const arrayLinkResult = [
     }
 ]
 
-describe('getFileLinks::', () => {
+describe('extract-links - getFileLinks::', () => {
     it('should be a function', () => {
         expect(typeof getFileLinks).toBe('function')
     })
@@ -15,5 +16,28 @@ describe('getFileLinks::', () => {
         const filePath = path.resolve('./test/files/text.md')
         const result = await getFileLinks(filePath)
         expect(result).toEqual(arrayLinkResult)
+    })
+    it('should return message \'None links found\'', async () => {
+        const filePath = path.resolve('./test/files/text-without-links.md')
+        const result = await getFileLinks(filePath)
+        expect(result).toBe('None links found')
+    })
+    it('should throw an error if the file does not exist', async () => {
+        const filePath = path.resolve('./test/files/file-that-dont-exist.md')
+        await expect(getFileLinks(filePath)).rejects.toThrow('None file found')
+    })
+})
+
+const longArguments = ['argument1', 'argument2', 'argument3', 'argument4', 'argument5'];
+const shortArguments = ['argument1', 'argument2', 'argument3'];
+
+describe('valid-arguments - isValidationRequired::', () => {
+    it('should return True if there are more than 3 arguments', () => {
+        const result = isValidationRequired(longArguments)
+        expect(result).toBe(true)
+    })
+    it('should return False if there are less or equal than 3 arguments', () => {
+        const result = isValidationRequired(shortArguments);
+        expect(result).toBe(false)
     })
 })
