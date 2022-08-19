@@ -11,21 +11,21 @@ function extractLinks(text) {
     return extractedLinks;
 }
 
-function trataErro(erro) {
-    console.log(erro)
-    throw new Error(chalk.red(erro.code, 'None file found'));
+function treatError(error) {
+    console.log(error)
+    throw new Error(chalk.red(error.code, 'None file found'));
 }
 
-async function pegaArquivo(filePath) {
+async function getFile(filePath) {
     const encoding = 'utf-8';
     try {
         const text = await fs.promises.readFile(filePath, encoding)
         console.log(extractLinks(text))
-    } catch (erro) {
-        trataErro(erro);
+    } catch (error) {
+        treatError(error);
     } finally {
         console.log(chalk.yellow('operation concluded'));
     }
 }
 
-module.exports = pegaArquivo
+module.exports = getFile
