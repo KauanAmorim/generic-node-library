@@ -13,11 +13,10 @@ function extractLinks(text) {
 }
 
 function treatError(error) {
-    console.log(error)
     throw new Error(chalk.red(error.code, 'None file found'));
 }
 
-async function getFile(filePath) {
+async function getFileLinks(filePath) {
     const encoding = 'utf-8';
     try {
         const text = await fs.promises.readFile(filePath, encoding)
@@ -29,4 +28,4 @@ async function getFile(filePath) {
     }
 }
 
-module.exports = getFile
+module.exports = getFileLinks
