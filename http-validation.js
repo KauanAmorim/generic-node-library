@@ -1,13 +1,21 @@
 const fetch = require('node-fetch')
 
+function treatError(error) {
+    throw new Error(error.message)
+}
+
 async function checkStatus(arrayLinks) {
-    const linksStatus = Promise.all(
-        arrayLinks.map(async link => {
-            const res = await fetch(link)
-            return res.status
-        })
-    )
-    return linksStatus
+    try {
+        const linksStatus = Promise.all(
+            arrayLinks.map(async link => {
+                const res = await fetch(link)
+                return res.status
+            })
+        )
+        return linksStatus
+    } catch(error) {
+        treatError(error)
+    }
 }
 
 function generateArrayLinks(arrayLinks) {
