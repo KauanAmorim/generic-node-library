@@ -8,7 +8,8 @@ function extractLinks(text) {
     while ((tmp = regex.exec(text)) !== null) {
         extractedLinks.push({ [tmp[1]]: tmp[2] });
     }
-    return extractedLinks;
+    
+    return extractedLinks.length === 0 ? 'None links found' : extractedLinks;
 }
 
 function treatError(error) {
@@ -20,7 +21,7 @@ async function getFile(filePath) {
     const encoding = 'utf-8';
     try {
         const text = await fs.promises.readFile(filePath, encoding)
-        console.log(extractLinks(text))
+        return extractLinks(text)
     } catch (error) {
         treatError(error);
     } finally {

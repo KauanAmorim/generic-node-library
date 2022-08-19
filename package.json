@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cli": "node cli.js ./arquivos/texto.md"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/KauanAmorim/generic-node-library#readme",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "node-fetch": "^2.6.7"
   }
 }
