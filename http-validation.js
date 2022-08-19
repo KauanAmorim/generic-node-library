@@ -9,7 +9,7 @@ async function checkStatus(arrayLinks) {
         const linksStatus = Promise.all(
             arrayLinks.map(async link => {
                 const res = await fetch(link)
-                return res.status
+                return { status: res.status, statusText: res.statusText }
             })
         )
         return linksStatus
@@ -29,7 +29,7 @@ async function validateLinks(links) {
     const linksStatus = await checkStatus(arrayLinks)
     
     const resultados = links.map((object, indice) => {
-        return { ...object, status: linksStatus[indice] }
+        return { ...object, status: linksStatus[indice].status, statusText: linksStatus[indice].statusText }
     })
 
     return resultados
