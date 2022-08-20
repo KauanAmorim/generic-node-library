@@ -1,6 +1,6 @@
 const path = require('path');
-const readFile = require('../extract-files-links')
-const { isValidationRequired, valid } = require('../valid-arguments');
+const readFile = require('../src/extract-files-links')
+const { isValidationRequired, valid } = require('../src/valid-arguments');
 
 const arrayLinkResult = [
     {
