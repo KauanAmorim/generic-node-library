@@ -1,10 +1,15 @@
-# generic-node-library - Portuguese
+# VMF - Portuguese
 
 <h2 color="red">Projeto em desenvolvimento</h2>
 
-Ferramenta feita para resgatar links de arquivos Markdown.
+Ferramenta feita para ler links de arquivos markdown e retornar suas informações
+- link
+- status code
+- status text
 
 A forma atual de como executar
+
+OBS: Por padrão a lib busca a pasta files
 
 ### Listagem de links apartir de diretório padrão (./files/)
 ```bash
@@ -21,5 +26,5 @@ vmf --rootdir <dirpath>
 vmf --filepath <filepath>
 ```
 
-# generic-node-library - English
+# VMF - English
 
