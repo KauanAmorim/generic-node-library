@@ -1,23 +1,28 @@
 {
-  "name": "generic-node-library",
+  "name": "vmf",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This repository validate links/URL in markdown files.",
+  "main": "./cli.js",
   "scripts": {
     "test": "jest ./test",
-    "cli": "node cli.js ./arquivos/texto.md"
+    "cli": "node cli"
   },
+  "bin": {
+    "vmf": "./cli.js"
+  },
+  "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KauanAmorim/generic-node-library.git"
+    "url": "git+https://github.com/KauanAmorim/vmf.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["markdown", "URL", "link", "URLs", "links"],
+  "author": "Kauan Amorim <kauanamorim88@gmail.com> (https://www.linkedin.com/in/kauan-amorim-a1035213b/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KauanAmorim/generic-node-library/issues"
+    "url": "https://github.com/KauanAmorim/vmf/issues",
+    "email": "kauanamorim88@gmail.com"
   },
-  "homepage": "https://github.com/KauanAmorim/generic-node-library#readme",
+  "homepage": "https://github.com/KauanAmorim/vmf#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "node-fetch": "^2.6.7"

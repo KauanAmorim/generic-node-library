@@ -6,24 +6,19 @@ Ferramenta feita para resgatar links de arquivos Markdown.
 
 A forma atual de como executar
 
-### Listagem de links
+### Listagem de links apartir de diretório padrão (./files/)
 ```bash
-node cli.js ./files/<file_name>
+vmf
 ```
 
-### Listagem da validade dos links
+### Listagem de links apartir de um diretório raiz
 ```bash
-node cli.js ./files/<file_name> --validade-links
+vmf --rootdir <dirpath>
 ```
 
-### Listagem de links apartir de um diretório raiz (Em desenvolvimento)
+### Listagem de links de um arquivo específico
 ```bash
-node cli.js --rootdir <dirpath>
-```
-
-### Listagem de links de um arquivo específico (Em desenvolvimento)
-```bash
-node cli.js --filepath <filepath>
+vmf --filepath <filepath>
 ```
 
 # generic-node-library - English
