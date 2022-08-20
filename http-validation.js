@@ -25,14 +25,19 @@ function generateArrayLinks(arrayLinks) {
 }
 
 async function validateLinks(links) {
-    const arrayLinks = generateArrayLinks(links)
-    const linksStatus = await checkStatus(arrayLinks)
-    
-    const resultados = links.map((object, indice) => {
-        return { ...object, status: linksStatus[indice].status, statusText: linksStatus[indice].statusText }
-    })
+    try {
 
-    return resultados
+        const arrayLinks = generateArrayLinks(links)
+        const linksStatus = await checkStatus(arrayLinks)
+        
+        const resultados = links.map((object, indice) => {
+            return { ...object, status: linksStatus[indice].status, statusText: linksStatus[indice].statusText }
+        })
+
+        return resultados
+    } catch (err) {
+        treatError(err)
+    }
 }
 
 module.exports = validateLinks

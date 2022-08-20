@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const fs = require('fs')
+const validateLinks = require('./http-validation')
 
 function extractLinks(text) {
     const regex = /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm;
@@ -9,11 +10,11 @@ function extractLinks(text) {
         extractedLinks.push({ [tmp[1]]: tmp[2] });
     }
     
-    return extractedLinks.length === 0 ? 'None links found' : extractedLinks;
+    return extractedLinks;
 }
 
-function treatError(error) {
-    throw new Error(chalk.red(error.code, 'None file found'));
+function treatFileError(error) {
+    throw new Error(chalk.red(error.code, 'File Not Found'));
 }
 
 async function getFileLinks(filePath) {
@@ -22,10 +23,13 @@ async function getFileLinks(filePath) {
         const text = await fs.promises.readFile(filePath, encoding)
         return extractLinks(text)
     } catch (error) {
-        treatError(error);
-    } finally {
-        console.log(chalk.yellow('operation concluded'));
+        treatFileError(error);
     }
 }
 
-module.exports = getFileLinks
+async function readFile(filePath) {
+    const links = await getFileLinks(filePath)
+    return links.length === 0 ? 'None Links Found' : validateLinks(links)
+}
+
+module.exports = readFile;

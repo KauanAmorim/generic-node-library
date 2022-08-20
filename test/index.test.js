@@ -1,49 +1,51 @@
 const path = require('path');
-const getFileLinks = require('../extract-links')
+const readFile = require('../extract-files-links')
 const { isValidationRequired, valid } = require('../valid-arguments');
 
 const arrayLinkResult = [
     {
-        FileList: 'https://developer.mozilla.org/pt-BR/docs/Web/API/FileList'
+        FileList: 'https://developer.mozilla.org/pt-BR/docs/Web/API/FileList',
+        status: 200,
+        statusText: 'OK'
     }
 ]
 
-describe('extract-links - getFileLinks::', () => {
+describe('extract-files-links - readFile::', () => {
     it('should be a function', () => {
-        expect(typeof getFileLinks).toBe('function')
+        expect(typeof readFile).toBe('function')
     })
     it('should return an array with a link result', async () => {
         const filePath = path.resolve('./test/files/text.md')
-        const result = await getFileLinks(filePath)
+        const result = await readFile(filePath)
         expect(result).toEqual(arrayLinkResult)
     })
     it('should return message \'None links found\'', async () => {
         const filePath = path.resolve('./test/files/text-without-links.md')
-        const result = await getFileLinks(filePath)
-        expect(result).toBe('None links found')
+        const result = await readFile(filePath)
+        expect(result).toBe('None Links Found')
     })
     it('should throw an error if the file does not exist', async () => {
         const filePath = path.resolve('./test/files/file-that-dont-exist.md')
-        await expect(getFileLinks(filePath)).rejects.toThrow('None file found')
+        await expect(readFile(filePath)).rejects.toThrow('File Not Found')
     })
 })
 
-const longArguments = ['argument1', 'argument2', 'argument3', 'argument4', 'argument5'];
-const shortArguments = ['argument1', 'argument2', 'argument3'];
+const longArguments = ['argument1', 'argument2', 'argument3'];
+const shortArguments = ['argument1', 'argument2'];
 
 describe('valid-arguments - isValidationRequired::', () => {
-    it('should return True if there are more than 3 arguments', () => {
+    it('should return True if there are more than 2 arguments', () => {
         const result = isValidationRequired(longArguments)
         expect(result).toBe(true)
     })
-    it('should return False if there are less or equal than 3 arguments', () => {
+    it('should return False if there are less or equal than 2 arguments', () => {
         const result = isValidationRequired(shortArguments);
         expect(result).toBe(false)
     })
 })
 
-const validArguments = ['argument1', 'argument2', 'argument3', '--rootdir']
-const invalidArguments = ['argument1', 'argument2', 'argument3', '--invalid-argument']
+const validArguments = '--rootdir'
+const invalidArguments = '--invalid-argument'
 
 describe('valid-arguments - valid::', () => {
     it('should return True if has valid arguments', () => {
